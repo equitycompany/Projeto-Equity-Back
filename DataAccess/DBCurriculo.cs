@@ -35,7 +35,6 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@Objetivo", Curriculo.Objetivo);
             cmd.ExecuteNonQuery();
         }
-
         public static void Alterar(Curriculo Curriculo)
         {
             String strSql = "UPDATE Curriculo ";
