@@ -120,5 +120,31 @@ namespace DataAccess
             }
             return listCand;
         }
+
+        public static bool CheckLogin(string login, string senha)
+        {
+            String strSQl = "Select Email, Senha from Candidato Where Email=@login";
+            SQLiteConnection con = DBConnect.Open();
+
+            SQLiteCommand cmd = con.CreateCommand();
+            cmd.CommandText = strSQl;
+            cmd.Parameters.AddWithValue("@login", login);
+            try
+            {
+                SQLiteDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (login == dr["Email"].ToString() && senha == dr["Senha"].ToString())
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
     }
 }
