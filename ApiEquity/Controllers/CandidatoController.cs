@@ -76,5 +76,18 @@ namespace ApiEquity.Controllers
 
             return lOk;
         }
+
+        [EnableCors("AllowAll")]
+        [HttpGet]
+        [Route("AlterarSenha/{changesenha}&{senha}")]
+        public bool AlterarSenha(string changesenha, string senha)
+        {
+            bool lOk;
+            string email = DBCandidato.FindChangePassEmail(changesenha);
+            DBCandidato.AlterarSenha(email, senha);
+            lOk = DBCandidato.ExcluirChgSenha(email);
+
+            return lOk;
+        }
     }
 }
